@@ -3,7 +3,7 @@ var
   router = express.Router(),
   app = express(),
 
-  dbSystem = require('db-system'),
+  dbSystem = require('./db-system'),
   db = dbSystem(),
 
   passport = require('passport'),

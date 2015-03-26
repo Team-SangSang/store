@@ -1,5 +1,5 @@
 var
-  port = process.env.PORT || 80,
+  port = process.env.PORT || 5432,
   
   // load modules
   express = require('express'),
