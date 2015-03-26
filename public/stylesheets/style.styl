@@ -1,0 +1,232 @@
+body
+  margin: 0
+  padding: 0
+  font: 15px "Segoe UI", "Malgun Gothic", NanumGothic, AppleGothic, sans-serif
+  color: #fff
+  background: #00529b
+.btn-lg, .btn-group-lg>.btn, .btn
+  border-radius: 0
+@media (min-width: 1200px)
+  .container
+    width: 1200px
+.navbar-default
+  padding: 20px 0
+  background: transparent
+  color: inherit
+  .navbar-nav>li>a, .navbar-brand
+    color: inherit
+  .navbar-nav>li>a
+    margin: 0 3px
+  .navbar-brand
+    font-size: 25px
+    margin: 0 30px
+  .navbar-nav>.open>a, .navbar-nav>.open>a:hover, .navbar-nav>.open>a:focus
+    background: transparent
+    color: inherit
+  .navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus, .navbar-nav>li>a:hover, .navbar-nav>li>a:focus, , .navbar-brand:hover, .navbar-brand:focus
+    background: #0b6bc4
+    color: inherit
+.navbar
+  border: 0
+.nav-tabs
+  border: 0
+.nav-tabs>li
+  margin: 12px 6px
+  margin-left: 0
+  margin-top: 0
+.nav-tabs>li>a
+  border: 0
+  color: inherit
+  border-radius: 0
+  background: transparent
+  margin-right: 5px
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav>li>a:hover, .nav>li>a:focus
+  background: #0b6bc4
+  border: 0
+  color: inherit
+  border-radius: 0
+.form-control
+  border-radius: 0
+  border: 0
+  box-shadow: none
+#scenarioContainer
+  width: 100%
+  min-height: 540px
+  background: rgba(255, 255, 255, 0.2)
+  position: relative
+  > canvas
+    position: relative
+.ui-icon-gripsmall-diagonal-se
+  background: rgba(0, 0, 0, 0.4)
+.cmd
+  margin: 5px 0
+  padding: 7px
+  display: block
+  background: #004684;
+  cursor: pointer;
+  > span
+    display: inline-block;
+  .glyphicon
+    display: inline-block
+    margin: 0 4px
+.cmd:focus, .cmd:hover
+  background: #005aaa
+.holdlight
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5)
+.holdlight2
+  box-shadow: 0 0 15px rgba(255, 100, 100, 1)
+.top-subnav
+  min-height: 120px
+.btn-icon
+  margin: 5px 5px
+  width: 80px
+  height: 90px
+  text-align: center
+  overflow: hidden
+  display: inline-block
+  span.text
+    margin-top: 8px
+    display: block
+    color: #fff
+    clear: both
+  span.glyphicon
+    padding-top: 9px
+    width: 50px
+    height: 50px
+    font-size: 28px
+    border: 2px solid #fff
+    border-radius: 25px
+    overflow: hidden
+    display: block-inline
+    color: #fff
+.tooltip
+  font-size: 14px
+  min-width: 200px
+.tooltip-inner
+  font-size: 14px
+  text-align: left
+div > .btn-icon:last-child
+  margin-right: -5px
+div > .btn-icon:first-child
+  margin-left: -5px
+  margin-right: 5px
+.btn-icon:hover, .btn-icon:focus
+  span.glyphicon
+    background: rgba(255, 255, 255, 0.05)
+.btn-icon:active
+  span.glyphicon
+    background: rgba(255, 255, 255, 0.4)
+.btn-icon:hover, .btn-icon:focus
+    text-decoration: none
+.navbar-nav>li>.dropdown-menu
+  border-radius: 0
+.row.modern
+  > div
+    position: relative
+    overflow: hidden
+    > div
+      width: 100%
+      padding: 35% 50%
+      > a
+        position: absolute
+        top: 5px
+        left: 5px
+        right: 5px
+        bottom: 5px
+        background: #fff
+        transition: transform 0.1s ease-in-out
+        border: 2px solid transparent
+        color: #222
+        cursor: pointer
+        h3, p
+          margin: 10px
+          padding: 0
+      > a:link
+        color: #222
+      > a:hover, a:focus
+        text-decoration: none
+        border-color: rgba(0, 0, 0, 0.3)
+        color: #222
+      > a:active
+        transform: scale(0.98)
+.modal .row.modern
+  padding: 0 10px;
+  > div
+    > div
+      > a
+        background: #00529b
+        color: #fff
+        h3, p
+          margin: 0 10px
+          margin-top: 10px
+        h3
+          font-size: 18px
+        p
+          font-size: 13px
+      > a:hover, a:focus
+        border-color: rgba(255, 255, 255, 0.7)
+.modal
+  color: #444
+.modal-xl
+  width: 1400px
+.modal-header
+  border: 0
+.modal-content
+  border-radius: 0
+  box-shadow: none
+.modal-footer
+  border: 0
+.modal .form-control
+  border: 2px solid #777
+.help-block
+  color: #fff
+.tr
+  text-align: right
+.tl
+  text-align: left
+.tc
+  text-align: center
+.fr
+  float: right
+.fl
+  float: left
+.cb
+  clear: both
+  overflow: hidden
+map
+  area
+    :hover
+      background: #000;
+a
+  color: #00B7FF
+label
+  font-weight: 400
+h1, h2, h3, h4, h5, h6
+  margin: 10px 0
+  padding: 0
+  font-weight: 400
+h1
+  font-size: 35px
+h2
+  font-size: 32px
+h3
+  font-size: 28px
+h4
+  font-size: 24px
+h5
+  font-size: 20px
+h6
+  font-size: 16px
+p
+  margin: 10px
+area
+  cursor: pointer
+table.cmd-line
+  > thead
+    > tr
+      > th
+        width: auto
+      > th.order
+        width: 60px
+      > th.content
+        width: 140px

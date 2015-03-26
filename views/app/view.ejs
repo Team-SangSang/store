@@ -1,0 +1,51 @@
+<%- layout('../layout/default') %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="md-area">
+        <h1 class="big"><%= union.title %></h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="md-masthead margin">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <iframe frameborder="0" src="/app/player/<%=union._id%>" width="100%" height="480" style="margin: 0;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class ="row">
+    <div class="col-xs-6">
+      <div class="md-area">
+        <h1>Description</h1>
+        <p class="small">
+          <span class="date">Published on <span><%= union.regdateF%></span></span>
+          <span class="date">Last edited on <span><%= union.lasteditF%></span></span>
+        </p>
+        <p><%= union.description %></p>
+        <div class="fb-like" data-href="http://app.sangja.com/app/<%=union._id%>" data-layout="button_count" data-action="recommend" data-show-faces="true" data-share="true"></div>
+      </div>
+      <div class="md-area">
+        <h1>Share</h1>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-xs-2">Code</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control" value="" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="md-area">
+        <h1>Comment</h1>
+        <div class="fb-comments" data-href="http://app.sangja.com/app/<%=union._id%>" data-numposts="5" data-colorscheme="light" width="100%"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<%- layout('../layout/default') %>
+<div class="container">
+  <div class="row top-subnav">
+    <div class="col-md-1">
+      <div class="fl">
+        <a class="btn-icon" href="/">
+          <span class="glyphicon glyphicon-arrow-left"></span>
+          <span class="text">뒤로가기</span>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <h1 class="fl">시나리오 목록</h1>
+    </div>
+    <div class="col-md-6">
+      <div class="fr tr">
+        <a class="btn-icon" href="/scenario/">
+          <span class="glyphicon glyphicon-refresh"></span>
+          <span class="text">새로고침</span>
+        </a>
+        <a class="btn-icon" href="/scenario/create">
+          <span class="glyphicon glyphicon-plus"></span>
+          <span class="text">추가하기</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!--@row-->
+  <div class="row modern">
+  <% for ( var $i in data ) { console.log(data[$i]); %>
+    <div class="col-sm-3">
+      <div> 
+        <a href="/scenario/<%= data[$i].id %>">
+          <h3><%= data[$i].title %></h3>
+          <p><%= data[$i].brief %></p>
+        </a>
+      </div>
+    </div>
+  <% } %>
+  <!--@loop-->
+  </div>
+  <!--@row-->
+</div>

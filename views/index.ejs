@@ -1,0 +1,88 @@
+<%- layout('layout/default') %>
+<main class="md-masthead">
+	<div class="container">
+	  <div class="row">
+	    <div class="col-xs-12">
+
+	      <h1><img src="http://sangja.org/wordpress/wp-content/uploads/2014/12/sangja-logo.png" /> <span>Drag and drop it to make it, rewrite it to upgrade it</span></h1>
+	    </div>
+	  </div>
+	  <!--@row-->
+	</div>
+</main>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="md-area orange">
+        <h1><a href="#">Hot <span class="glyphicon glyphicon-chevron-right"></span> <em>The hottest items</em></a></h1>
+        <div class="md-list big col-4">
+          <%
+            for ( var no in union ) {
+              var article = union[no];
+          %>
+          <a class="md-list-item" href="/app/<%=article._id%>">
+            <div>
+              <div class="md-list-item-text full">
+                <div class="md-list-item-icon">
+                  <img src="<%=article.thumbnail || '/images/no-thumbnail.png'%>" />
+                </div>
+                <p><%=article.title || ''%></p>
+              </div>
+            </div>
+          </a>
+          <%
+            } // @end forloop
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="md-area grassgreen">
+        <h1><a href="#">Hot <span class="glyphicon glyphicon-chevron-right"></span> <em>The hottest items</em></a></h1>
+        <div class="md-list big col-4">
+          <%
+            for ( var no in union ) {
+              var article = union[no];
+          %>
+          <a class="md-list-item" href="/app/<%=article._id%>">
+            <div>
+              <div class="md-list-item-text full">
+                <div class="md-list-item-icon">
+                  <img src="<%=article.thumbnail || '/images/no-thumbnail.png'%>" />
+                </div>
+                <h2><%=article.title || ''%></h2>
+              </div>
+            </div>
+          </a>
+          <%
+            } // @end forloop
+          %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="md-area green">
+        <h1><a href="#">Hot <span class="glyphicon glyphicon-chevron-right"></span> <em>The hottest items</em></a></h1>
+        <div class="md-list big col-4">
+          <%
+            for ( var no in union ) {
+              var article = union[no];
+          %>
+          <a class="md-list-item" href="/app/<%=article._id%>">
+            <div>
+              <div class="md-list-item-text full">
+                <div class="md-list-item-icon">
+                  <img src="<%=article.thumbnail || '/images/no-thumbnail.png'%>" />
+                </div>
+                <h2><%=article.title || ''%></h2>
+              </div>
+            </div>
+          </a>
+          <%
+            } // @end forloop
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

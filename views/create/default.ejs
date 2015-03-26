@@ -1,0 +1,149 @@
+<%- layout('../layout/default') %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="md-area skyblue">
+        <h1>Project Template <em>Basic templates</em></h1>
+        <div class="md-list col-4">
+          <a class="md-list-item" data-toggle="modal" data-target="#modalCreateProject">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Empty Project</h2>
+                <p>There is nothing.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="md-area green">
+        <h1>Tutorial Example <em>Learn about the basic elements of SangJa</em></h1>
+        <div class="md-list col-4">
+          <a class="md-list-item" data-toggle="modal" data-target="#modalCreateProject">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Variable</h2>
+                <p>Way to make your program expand.</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Condition</h2>
+                <p>How to control the flow of programming logic.</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Repeating</h2>
+                <p>How to process repeated same routine.</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Repeating</h2>
+                <p>How to process repeated same routine.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="md-area magenta">
+        <h1>Demo Template <em>See what you can do with SangJa</em></h1>
+        <div class="md-list col-4">
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Shooting Game</h2>
+                <p>Old style shooting game.</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Racing Game</h2>
+                <p>Classic racing game.</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <div class="md-list-item-icon">
+                  <img src="/images/austronut.png" />
+                </div>
+                <h2>Big Bang</h2>
+                <p>Colorful explosing</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade md-modal" id="modalCreateProject" tabindex="-1" role="dialog" aria-labelledby="modalCreateProject" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Create Project</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" method="post" action="/create/register">
+          <div class="form-group">
+            <label for="project_name" class="col-sm-2 control-label">Project Name <span class="require">*</span></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="project_name" name="title" placeholder="My Project">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="project_desc" class="col-sm-2 control-label">Project Description</label>
+            <div class="col-sm-10">
+              <textarea type="text" rows="4" class="form-control" id="project_desc" name="description" placeholder="Write down your project description."></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <button type="submit" class="btn btn-primary btn-block">Apply</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

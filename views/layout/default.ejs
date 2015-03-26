@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="fb:admins" content="beingbook@gmail.com"/>
+    <meta property="fb:app_id" content="393591520822349"/
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/jquery-ui.min.css' />
+    <link rel='stylesheet' href='/stylesheets/common.css' />
+    <script src="/javascripts/jquery-1.1.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">SangJa</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <%
+              for ( var i in menu.left ) {
+                var currentItem = menu.left[i];
+                if ( request.url.match(currentItem.link) ) {
+            %>
+            <li class="active"><a href="<%=currentItem.link%>"><%= currentItem.label %></a></li>
+            <%
+                } else {
+            %>
+            <li><a href="<%=currentItem.link%>"><%= currentItem.label %></a></li>
+            <%
+                } // @end if
+              } // @end for
+            %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if ( request.user ) { %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, <%= request.user.displayName %> <img style="width: 40px; height: 40px; margin: -17px 5px; border: 3px solid #fff;" src="<%= request.user.photos[0].value%>" /> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Account</a></li>
+                <li><a href="#">My Projects</a></li>
+                <li class="divider"></li>
+                <li><a href="/fb/logout">Sign out</a></li>
+              </ul>
+            </li>
+            <% } else { %>
+            <li>
+              <a href="/fb">Sign in</a>
+            </li>
+            <% } %>
+          </ul>
+          <form class="form-inline navbar-right md-navbar-search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="" />
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!--@header-->
+    <%- body %>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-2">
+            <aside class="footer-logo">
+              <h1>SangJa</h1>
+              <p>Site Profile Text</p>
+            </aside>
+          </div>
+          <div class="col-xs-6">
+            <nav class="footer-sitemap">
+              <h3>Site Map</h3>
+              <ul>
+                <li>
+                  <h4>Category</h4>
+                  <ul>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <h4>Category</h4>
+                  <ul>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <h4>Category</h4>
+                  <ul>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <h4>Category</h4>
+                  <ul>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-xs-4">
+            <aside class="footer-copyright">
+              <p>Copyright Text</p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="fb-root"></div>
+    <script>
+      // This is called with the results from from FB.getLoginStatus().
+      function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+          // Logged into your app and Facebook.
+        } else if (response.status === 'not_authorized') {
+          // The person is logged into Facebook, but not your app.
+        } else {
+          // The person is not logged into Facebook, so we're not sure if
+          // they are logged into this app or not.
+        }
+      }
+
+      // This function is called when someone finishes with the Login
+      // Button.  See the onlogin handler attached to it in the sample
+      // code below.
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '393591520822349',
+          cookie     : true,  // enable cookies to allow the server to access 
+                              // the session
+          xfbml      : true,  // parse social plugins on this page
+          version    : 'v2.2' // use version 2.2
+        });
+
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+
+        /*FB.login(function (respone) {
+          console.log(respone);
+        }, {scope: 'user_friends'});*/
+      };
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script src="/javascripts/jquery.bind.js"></script>
+    <script src="/javascripts/underscope.js"></script>
+    <script src="/javascripts/backbone.js"></script>
+    <script src="/javascripts/jquery-ui.min.js"></script>
+    <script src="/javascripts/jquery-ui-mobile.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+  </body>
+</html>

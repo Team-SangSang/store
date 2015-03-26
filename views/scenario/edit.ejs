@@ -1,0 +1,308 @@
+<%- layout('../layout/default') %>
+<div class="container" ng-controller="ScenarioEdit">
+  <div class="row top-subnav">
+    <div class="fl col-md-1">
+      <a class="btn-icon" href="/scenario">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        <span class="text">뒤로가기</span>
+      </a>
+    </div>
+    <h1 class="fl col-md-5" id="scenarioTitle"><%= scenario.title %></h1>
+    <div class="fr col-md-6 tr">
+      <a class="btn-icon" href="#" data-controller="save">
+        <span class="glyphicon glyphicon-floppy-save"></span>
+        <span class="text">저장</span>
+      </a>
+      <a class="btn-icon" href="" data-toggle="modal" data-target="#modifyModal">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="text">수정</span>
+      </a>
+      <a class="btn-icon" href="" data-toggle="modal" data-target="#deleteModal">
+        <span class="glyphicon glyphicon-remove"></span>
+        <span class="text">삭제</span>
+      </a>
+      <a class="btn-icon" href="#" data-controller="simulate">
+        <span class="glyphicon glyphicon-step-forward"></span>
+        <span class="text">디버그</span>
+      </a>
+      <a class="btn-icon" href="#" data-controller="start">
+        <span class="glyphicon glyphicon-play"></span>
+        <span class="text">시작</span>
+      </a>
+      <a class="btn-icon" href="#" data-controller="stop">
+        <span class="glyphicon glyphicon-stop"></span>
+        <span class="text">중지</span>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <h5>명령</h5>
+      <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#cmdHigh" aria-controls="cmdHigh" role="tab" data-toggle="tab">쉬움</a></li>
+          <li role="presentation"><a href="#cmdLow" aria-controls="cmdLow" role="tab" data-toggle="tab">어려움</a></li>
+          <li role="presentation"><a href="#cmdEvent" aria-controls="cmdEvent" role="tab" data-toggle="tab">이벤트</a></li>
+          <li role="presentation"><a href="#cmdFlow" aria-controls="cmdFlow" role="tab" data-toggle="tab">흐름</a></li>
+          <li role="presentation"><a href="#cmdVar" aria-controls="cmdVar" role="tab" data-toggle="tab">변수 및 연산</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div id="commandList" class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="cmdHigh">
+            <div class="cmd" exec="setone" icon="star" title="시프트레지스터의 신호 하나를 제어합니다.">
+              <span>신호 설정</span>
+            </div>
+            <div class="cmd" exec="svattach" icon="cog" title="서보모터를 사용시작합니다.">
+              <span>서보모터 연결</span>
+            </div>
+            <div class="cmd" exec="svdetach" icon="cog" title="서보모터를 해제합니다.">
+              <span>서보모터 해제</span>
+            </div>
+            <div class="cmd" exec="svwrite" icon="cog" title="서보모터를 제어합니다.">
+              <span>서보모터 제어</span>
+            </div>
+            <div class="cmd" exec="srgb" icon="flash" title="시프트레지스터에 연결되어 있는 RGB LED를 RGB 체계로 제어합니다.">
+              <span>RGB LED 설정</span>
+            </div>
+            <div class="cmd" exec="shsv" icon="flash" title="시프트레지스터에 연결되어 있는 RGB LED를 HSV 체계로 제어합니다.">
+              <span>RGB HSV 설정</span>
+            </div>
+            <div class="cmd" exec="sargb" icon="flash" title="시프트레지스터에 연결되어 있는 모든 RGB LED를 RGB 체계로 제어합니다.">
+              <span>모든 RGB 설정</span>
+            </div>
+            <div class="cmd" exec="sahsv" icon="flash" title="시프트레지스터에 연결되어 있는 모든 RGB LED를 HSV 체계로 제어합니다.">
+              <span>모든 HSV 설정</span>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="cmdLow">
+            <div class="cmd" exec="pm" icon="pushpin" title="모든 핀을 INPUT 또는 OUTPUT으로 설정합니다.">
+              <span>핀 설정</span>
+            </div>
+            <div class="cmd" exec="dw" icon="pencil" title="지정된 핀에 0 또는 1 신호를 보냅니다.">
+              <span>디지털 작성</span>
+            </div>
+            <div class="cmd" exec="dr" icon="eye-open" title="지정된 핀으로부터 0 또는 1의 신호를 받습니다.">
+              <span>디지털 읽기</span>
+            </div>
+            <div class="cmd" exec="aw" icon="pencil" title="지정된 핀으로 0~255 사이의 신호를 보냅니다.">
+              <span>아날로그 작성</span>
+            </div>
+            <div class="cmd" exec="ar" icon="pencil" title="지정된 핀으로부터 0~1024 사이의 신호를 받습니다.">
+              <span>아날로그 읽기</span>
+            </div>
+            <div class="cmd" exec="delay" icon="pause" title="처리 과정을 잠깐 지연시킵니다.">
+              <span>지연</span>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="cmdEvent">
+            <div class="cmd" exec="start" icon="play-circle" title="프로그램이 시작될 때 가장 먼저 시작되는 노드입니다.">
+              <span>프로그램 시작</span>
+            </div>
+            <div class="cmd" exec="end" icon="download" title="프로그램이 종료될 때 가장 먼저 시작되는 노드입니다.">
+              <span>프로그램 종료</span>
+            </div>
+            <div class="cmd" exec="update" icon="download" title="프로그램이 실행되어 있는 동안 계속해서 실행되는 노드입니다.">
+              <span>프로그램 업데이트</span>
+            </div>
+            <div class="cmd" exec="call" icon="globe" title="이미 작성되어 있는 시나리오를 실행합니다.">
+              <span>시나리오 실행</span>
+            </div>
+            <div class="cmd" exec="return" icon="share-alt" title="시나리오에 인자를 전송하고 현재 시나리오를 종료합니다.">
+              <span>시나리오 인자 전송</span>
+            </div>
+            <div class="cmd" exec="trigger" icon="download" title="처리된 시나리오로부터 반환값을 받습니다.">
+              <span>시나리오 이벤트</span>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="cmdFlow">
+            <div class="cmd" exec="loop" icon="repeat" title="지정한 횟수만큼 반복하거나 조건이 참일때만 반복합니다.">
+              <span>반복하기</span>
+            </div>
+            <div class="cmd" exec="endloop" icon="repeat" title="반복을 종료합니다.">
+              <span>반복 끝내기</span>
+            </div>
+            <div class="cmd" exec="if" icon="ok-circle" title="조건이 참일때만 실행됩니다.">
+              <span>조건걸기</span>
+            </div>
+            <div class="cmd" exec="elseif" icon="ok-circle" title="다른 조건이 참일 때 실행됩니다. 앞의 조건이 참이라면 실행되지 않습니다.">
+              <span>다른 조건</span>
+            </div>
+            <div class="cmd" exec="else" icon="ok-circle" title="아무런 조건이 맞지 않을 때 실행됩니다. 앞의 조건이 참이라면 실행되지 않습니다.">
+              <span>아니라면</span>
+            </div>
+            <div class="cmd" exec="endif" icon="ok-circle" title="조건 검사를 종료합니다.">
+              <span>조건 끝내기</span>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="cmdVar">
+            <div class="cmd" exec="let" icon="floppy-disk" title="변수를 선언합니다.">
+              <span>선언하기</span>
+            </div>
+            <div class="cmd" exec="oper" icon="retweet" title="사칙 연산을 수행합니다.">
+              <span>사칙 연산</span>
+            </div>
+            <div class="cmd" exec="compare" icon="search" title="비교 연산을 수행합니다.">
+              <span>비교하기</span>
+            </div>
+            <div class="cmd" exec="math" icon="random" title="수학 함수를 연산합니다.">
+              <span>수학 함수</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-7">
+      <h5>시나리오 구성</h5>
+      <div id="scenarioContainer" class="scenario-context">
+        <canvas id="scenarioCanvas"></canvas>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h5>노드 속성</h5>
+      <form role="form" id="compAttribute">
+      </form>
+    </div>
+  </div>
+  <!--@row-->
+</div>
+
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">닫기</span></button>
+        <h5 class="modal-title" id="myModalLabel">제목 수정</h5>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" id="modifyScenario">
+          <input type="hidden" name="id" value="<%= scenario.id %>" />
+          <div class="form-group">
+            <label for="modifyTitle" class="col-sm-2 control-label">제목</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="modifyTitle" name="title" value="<%= scenario.title %>" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="modifyBrief" class="col-sm-2 control-label">요약</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" name="brief" id="modifyBrief"><%= scenario.brief %></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-controller="save">변경사항 저장</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="dataSelector" tabindex="-2" role="dialog" aria-labelledby="dataSelector" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">닫기</span></button>
+        <h5 class="modal-title" id="dataSelectorTitle">시나리오 목록</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row modern" id="dataList">
+        <% for ( var $i in data ) { console.log(data[$i]); %>
+          <div class="col-md-3">
+            <div>
+              <a data-val="<%= data[$i].id %>">
+                <h3><%= data[$i].title %></h3>
+                <p><%= data[$i].brief %></p>
+              </a>
+            </div>
+          </div>
+        <% } %>
+        <!--@loop-->
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-2" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">닫기</span></button>
+        <h5 class="modal-title" id="dataSelectorTitle">확인 메세지</h5>
+      </div>
+      <div class="modal-body">
+        <p>정말로 삭제하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-controller="delete">삭제</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--@modifyModal-->
+<div class="modal fade" id="pinModal" tabindex="-2" role="dialog" aria-labelledby="pinModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">닫기</span></button>
+        <h5 class="modal-title" id="dataSelectorTitle">핀 선택하기</h5>
+      </div>
+      <div class="modal-body tc">
+        <img src="/images/home.png" usemap="#pinMap" />
+        <map name="pinMap">
+          <area shape="circle" coords="450, 490, 25" href="#" data-num="0" />
+          <area shape="circle" coords="430, 551, 25" href="#" data-num="1" />
+          <area shape="circle" coords="364, 577, 25" href="#" data-num="2" />
+          <area shape="circle" coords="296, 552, 25" href="#" data-num="3" />
+          <area shape="circle" coords="274, 492, 25" href="#" data-num="4" />
+          <area shape="circle" coords="298, 429, 25" href="#" data-num="5" />
+          <area shape="circle" coords="366, 400, 25" href="#" data-num="6" />
+          <area shape="circle" coords="430, 429, 25" href="#" data-num="7" />
+          <area shape="circle" coords="488, 436, 25" href="#" data-num="8" />
+          <area shape="circle" coords="490, 536, 25" href="#" data-num="9" />
+          <area shape="circle" coords="413, 611, 25" href="#" data-num="10" />
+          <area shape="circle" coords="309, 609, 25" href="#" data-num="11" />
+          <area shape="circle" coords="243, 547, 25" href="#" data-num="12" />
+          <area shape="circle" coords="240, 439, 25" href="#" data-num="13" />
+          <area shape="circle" coords="309, 371, 25" href="#" data-num="14" />
+          <area shape="circle" coords="417, 364, 25" href="#" data-num="15" />
+          <!--<area shape="circle" coords="368, 320, 25" href="#" data-num="16" />
+          <area shape="circle" coords="535, 487, 25" href="#" data-num="17" />
+          <area shape="circle" coords="365, 660, 25" href="#" data-num="18" />
+          <area shape="circle" coords="191, 486, 25" href="#" data-num="19" />
+          <area shape="circle" coords="712, 560, 25" href="#" data-num="17" />-->
+          <area shape="circle" coords="778, 669, 25" href="#" data-num="17" />
+          <!--<area shape="circle" coords="846, 558, 25" href="#" data-num="21" />-->
+          <area shape="circle" coords="1150, 691, 25" href="#" data-num="20" />
+          <area shape="circle" coords="1247, 575, 25" href="#" data-num="23" />
+          <area shape="circle" coords="1247, 360, 25" href="#" data-num="22" />
+          <area shape="circle" coords="1247, 152, 25" href="#" data-num="21" />
+          <!--<area shape="circle" coords="1246, 150, 25" href="#" data-num="24" />-->
+          <area shape="circle" coords="1150, 34, 25" href="#" data-num="25" />
+          <area shape="circle" coords="312, 35, 25" href="#" data-num="26" />
+          <area shape="circle" coords="145, 36, 25" href="#" data-num="27" />
+          <area shape="circle" coords="25, 151, 25" href="#" data-num="28" />
+          <area shape="circle" coords="27, 378, 25" href="#" data-num="29" />
+          <area shape="circle" coords="24, 611, 25" href="#" data-num="30" />
+          <area shape="circle" coords="213, 690, 25" href="#" data-num="31" />
+          <area shape="circle" coords="489, 697, 25" href="#" data-num="32" />
+          <area shape="circle" coords="69, 93, 25" href="#" data-num="0" />
+          <area shape="circle" coords="62, 496, 25" href="#" data-num="1" />
+          <area shape="circle" coords="429, 174, 25" href="#" data-num="6" />
+          <area shape="circle" coords="508, 170, 25" href="#" data-num="5" />
+          <area shape="circle" coords="779, 606, 25" href="#" data-num="4" />
+          <area shape="circle" coords="597, 62, 25" href="#" data-num="9" />
+        </map>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--@pinModal-->
+<script type="text/javascript" src="/javascripts/executer.js"></script>
+<script type="text/javascript" src="/javascripts/editor.js"></script>

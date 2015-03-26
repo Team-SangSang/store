@@ -1,0 +1,230 @@
+<%- layout('../layout/default') %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="md-area">
+        <% include ../component/btn-back %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="md-area skyblue">
+        <h1>Project Information <em>Express your project</em></h1>
+        <form class="form-horizontal" method="post" action="/app/edit/info">
+          <div class="form-group">
+            <label for="project_name" class="col-sm-4 control-label">Project Name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="project_name" name="title" value="<%= union.title %>" placeholder="My Project">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="project_release" class="col-sm-4 control-label">Project Type <span class="require">*</span></label>
+            <div class="col-sm-8">
+              <select class="form-control" id="project_release" name="isReleased">
+                <option value="false">Private</option>
+                <option value="true" <%=union.isReleased && "selected"%>>Public</option>
+              </select>
+            </div>
+          </div>
+          <div clas
+          <div class="form-group">
+            <label for="project_desc" class="col-sm-4 control-label">Project Description</label>
+            <div class="col-sm-8">
+              <textarea type="text" rows="4" class="form-control" name="description" id="project_desc" placeholder="Write down your project description."><%= union.description %></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <input type="hidden" id="unionID" name="id" value="<%= union._id %>" />
+              <button type="submit" class="btn btn-primary btn-block">Apply</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="md-area skyblue">
+        <h1>Thumbnail Image</h1>
+        <div class="md-thumbnail">
+          <% if ( union.thumbnail ) { %>
+          <img id="thumbnailImage" class="" src="<%= union.thumbnail %>" />
+          <% } else { %>
+          <p id="noThumbnail">No thumbnail image registered. If you update your project once, it will be replaced thumbnail.</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-5 col-xs-offset-1">
+      <div class="md-area green">
+        <h1>Develop <em></em></h1>
+        <div class="md-list col-2">
+          <a class="md-list-item" data-toggle="modal" data-target="#modalEditProject">
+            <div>
+              <div class="md-list-item-text">
+                <h2>Edit</h2>
+                <p>Open SangJa editor</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <h2>Preview</h2>
+                <p>Checkout your project before release</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="md-area magenta">
+        <h1>Manage Project <em>See what you can do with SangJa</em></h1>
+        <div class="md-list col-2">
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <h2>Remove</h2>
+                <p>Delete this project.</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <h2>Share</h2>
+                <p>Show share link</p>
+              </div>
+            </div>
+          </a>
+          <a class="md-list-item" href="#">
+            <div>
+              <div class="md-list-item-text">
+                <h2>Clone</h2>
+                <p>Make same project</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade md-modal fullscreen" id="modalEditProject" tabindex="-1" role="dialog" aria-labelledby="modalEditProject" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <iframe frameborder="0" src="/voxel/index.html" id="externEditor"></iframe>
+      </div>
+      <div class="modal-footer">
+        <span id="status">Last Edited at <%= union.lasteditF %></span>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btnUnionApply">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer>
+(function () {
+  "use strict";
+
+  var
+    $voxelEditor,
+    editorContent,
+    SANGJA,
+
+    UI = {
+      unionID: {},
+
+      thumbnailImage: {},
+      noThumbnail: {},
+
+      externEditor: {
+        load: function (event) {
+          var
+            $status = UI.status;
+
+          $voxelEditor = UI.externEditor;
+          editorContent = $voxelEditor[0].contentWindow;
+          SANGJA = editorContent.SANGJA;
+
+          $.ajax({
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+            url: '/app/import/' + UI.unionID.val(),
+            success: function (respone) {
+              var asset = SANGJA.parser.jsonToUnion(respone.content);
+              SANGJA.renderer.scene.remove(SANGJA.builder.world);
+              SANGJA.builder.world = asset;
+              SANGJA.renderer.scene.add(asset);
+
+              console.log(respone);
+
+              editorContent.article = respone;
+            }
+          });
+        }
+      },
+
+      status: {},
+
+      btnUnionApply: {
+        click: function (event) {
+          var
+            jsonData = {
+              id: UI.unionID.val(),
+              content: SANGJA.parser.unionToJson(SANGJA.builder.world),
+              thumbnail: SANGJA.renderer.capture()
+            },
+
+            $status = UI.status;
+
+          $.ajax({
+            type: 'POST',
+            url: '/app/edit/union',
+            data: jsonData,
+            dataType: 'json',
+            success: function (respone) {
+              console.log(respone);
+              if ( respone.error ) {
+                $status.text('Error: ' + respone.message);
+              }
+              else {
+                // 썸네일 대체 검사
+                var
+                  $Thumbnail = UI.thumbnailImage;
+
+                if ( $Thumbnail.length <= 0 ) {
+                  var
+                    $noThumbnail = UI.noThumbnail;
+                  
+                  $Thumbnail = $('<img />');
+
+                  $noThumbnail.after($Thumbnail).remove();
+
+                  UI.thumbnailImage = $Thumbnail;
+                }
+                
+                $Thumbnail.attr('src', jsonData.thumbnail);
+                
+                $status.text('Successfully Saved at ' + respone.union.lastedit);
+              }
+            }
+          });
+        }
+      }
+    };
+
+  for ( var selector in UI ) {
+    var
+      currentUI = UI[selector],
+      $node = $('#' + selector);
+
+    for ( var bindEvent in currentUI ) {
+      $node.bind(bindEvent, currentUI[bindEvent]);
+    }
+
+    UI[selector] = $node;
+  }
+})();
+</script>
